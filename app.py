@@ -1,18 +1,18 @@
 import streamlit as st
-import os
 from GroundingDINO.groundingdino.util.inference import load_model, load_image, predict, annotate
-import supervision as sv
 import cv2
 import numpy as np
 import GroundingDINO.groundingdino.datasets.transforms as T
-from typing import Tuple
 from PIL import Image
-
+import os
+import wget
 
 st.title('Grounding DINO')
-
-CONFIG_PATH = 'GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py'
+CONFIG_PATH = os.path.join('GroundingDINO', 'groundingdino', 'config', 'GroundingDINO_SwinT_OGC.py')
 WEIGHTS_PATH = "groundingdino_swint_ogc.pth"
+if not os.path.exists(WEIGHTS_PATH):
+    wget.download('https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth')
+
 transform = T.Compose(
     [
         T.RandomResize([800], max_size=1333),
@@ -21,8 +21,8 @@ transform = T.Compose(
     ]
 )
 
-BOX_TRESHOLD = 0.35
-TEXT_TRESHOLD = 0.25
+BOX_TRESHOLD = st.sidebar.slider('Box Threshold:', min_value=0.0, max_value=1.0, value=0.35)
+TEXT_TRESHOLD = st.sidebar.slider('Text Threshold:', min_value=0.0, max_value=1.0, value=0.25)
 
 model = load_model(CONFIG_PATH, WEIGHTS_PATH)
 
