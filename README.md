@@ -2,6 +2,9 @@
 [<img src="https://img.shields.io/badge/Docker-Image-blue.svg?logo=docker">](<https://hub.docker.com/repository/docker/naseemap47/streamlit-dino>) <br>
 Dashboard for Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection
 
+## Dashboard
+![dashboard](https://github.com/naseemap47/Streamlit-GroundingDINO/assets/88816150/e84fdd9c-5b27-4e88-95bd-a236b195ca00)
+
 ## Installtion
 1. **Clone this Repo**
 ```

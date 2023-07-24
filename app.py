@@ -8,11 +8,20 @@ import os
 import wget
 
 st.title('Grounding DINO')
-CONFIG_PATH = os.path.join('GroundingDINO', 'groundingdino', 'config', 'GroundingDINO_SwinT_OGC.py')
-WEIGHTS_PATH = "groundingdino_swint_ogc.pth"
-if not os.path.exists(WEIGHTS_PATH):
-    wget.download('https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth')
+# Model Backbone
+backbone = st.selectbox('Choose Backbone:', ['Swin-T', 'Swin-B'])
+if backbone == 'Swin-T':
+    CONFIG_PATH = os.path.join('GroundingDINO', 'groundingdino', 'config', 'GroundingDINO_SwinT_OGC.py')
+    WEIGHTS_PATH = "groundingdino_swint_ogc.pth"
+    if not os.path.exists(WEIGHTS_PATH):
+        wget.download('https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth')
+else:
+    CONFIG_PATH = os.path.join('GroundingDINO', 'groundingdino', 'config', 'GroundingDINO_SwinB_cfg.py')
+    WEIGHTS_PATH = "groundingdino_swinb_cogcoor.pth"
+    if not os.path.exists(WEIGHTS_PATH):
+        wget.download('https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha2/groundingdino_swinb_cogcoor.pth')
 
+# Transformation
 transform = T.Compose(
     [
         T.RandomResize([800], max_size=1333),
