@@ -1,4 +1,5 @@
 # Streamlit-GroundingDINO
+[<img src="https://img.shields.io/badge/Docker-Image-blue.svg?logo=docker">](<https://hub.docker.com/repository/docker/naseemap47/streamlit-dino>) <br>
 Dashboard for Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection
 
 ## Installtion
